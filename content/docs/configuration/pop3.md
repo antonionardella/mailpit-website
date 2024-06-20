@@ -14,7 +14,7 @@ Mailpit has the ability to run a POP3 server, allowing you to download captured 
 
 ## Notes about the POP3 server
 
-1. Messages deleted via POP3 by the client are deleted from the Mailpit server too.
+1. Messages deleted via POP3 by the client are deleted from the Mailpit server too, unless the `--no-delete` flag is set
 2. Downloading messages will *not* mark those messages as read in Mailpit.
 3. For performance reasons, only the latest 100 messages are available via POP3. If this is a problem for you and you have a valid reason for accessing more, then please [open an issue](https://github.com/axllent/mailpit/issues) on Github to discuss this further.
 4. The POP3 server will run either unencrypted *or* using SSL/TLS encryption, but not both.
@@ -49,3 +49,11 @@ mailpit \
 ```
 
 Certificates can be either [self-signed/generated](../certificates/) or official certificates (if you have a valid domain name) obtained via sources like [Let's Encrypt](https://letsencrypt.org/).
+
+## Do not delete mails right away
+
+To keep the emails in the POP3 server even if the client requests to delete them it is possible to provide the startup flag `--no-delete` or the `MP_POP3_NO_DELETE=true` environment variable.
+
+```shell
+mailpit --no-delete
+```
